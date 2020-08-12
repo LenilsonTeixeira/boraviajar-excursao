@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+  profiles:
+    active: '@activatedProperties@'
+    cache:
+      type: redis
+      redis:
+        timeToLive: 7200000
+    redis:
+      host: localhost
+      port: 6379
+      password: boraviajar
+      timeout: 2000
+  data:
+    mongodb:
+      authentication-database: admin
+      username: root
+      password: root
+      database: apimanager
+      host: localhost
+      port: 27017
+  cloud:
+    stream:
+      kafka:
+        binder:
+          zkNodes: localhost:2181
+          brokers: localhost:29092
+      bindings:
+        travel:
+          contentType: application/json
+          binder: ms-kafka
+        delete-travel:
+          contentType: application/json
+          binder: ms-kafka
+      binders:
+        ms-kafka:
+          type: kafka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+storage:
+  image:
+    logo:
+      path: /home/lenilson/Documents/boraviajar/api-manager/uploads/images/logos
+  travel:
+    image:
+      path: /home/lenilson/Documents/boraviajar/api-manager/uploads/images/travels

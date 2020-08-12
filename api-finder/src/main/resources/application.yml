@@ -1,0 +1,23 @@
+server:
+  port: 8082
+elasticsearch:
+  host: localhost
+  port: 9200
+  index: "travel-*"
+  search:
+    scrollTimeValue: 5
+    size: 15
+
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+    health:
+      elasticsearch:
+        enabled: false
